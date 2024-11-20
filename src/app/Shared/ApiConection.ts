@@ -8,7 +8,7 @@ export class ApiConection {
   private headers = new HttpHeaders().set('Content-Type', 'application/json');
   private options = {headers:this.headers}
   token: string | null = ''
-  baseURL = 'http://localhost:8000/'
+  baseURL = 'http://127.0.0.1:8000/'
   private headersAll = {};
   private optionsAll = {};
 
@@ -17,7 +17,7 @@ export class ApiConection {
 
 
   login(data:any):Observable<any>{
-    return this.http.post('http://localhost:8000/api-auth/',data,this.options)
+    return this.http.post('http://127.0.0.1:8000/api-auth/',data,this.options)
       .pipe(
         map((response:any) => {
           this.token = response.token;
