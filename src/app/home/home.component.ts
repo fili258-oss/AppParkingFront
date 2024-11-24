@@ -51,15 +51,21 @@ export class HomeComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'Home',
+        label: 'Parqueaderos',
+        url:"/home",
         icon: 'pi pi-home'
+      },
+      {
+        label: 'Propietarios',
+        url: '/owners',
+        icon: 'pi pi-user'
       },
     ]
     this.listaParqueaderos()
   }
 
   listar() {
-    this.api.get('pareuadero')
+    this.api.get('parqueadero')
       .subscribe(data => {
         console.log(data);
       })

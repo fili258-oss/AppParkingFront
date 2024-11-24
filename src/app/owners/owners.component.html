@@ -1,0 +1,77 @@
+<div class="flex justify-content-center">
+    <div class="w-6 flex gap-5 flex-column">
+      <p-menubar [model]="items" />
+      <p-table [value]="propietarios" styleClass="{{'p-datatable-sm'}}"
+               selectionMode="single" [(selection)]="selectedPropietario" (onRowSelect)="seleccionarPropietario()" >
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+            Propietarios registrados
+            <p-button icon="pi pi-plus" (click)="verFormPropietario = true"/>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Identificación</th>
+            <th>Nombre</th>    
+            <th>Email</th>
+            <th>Edad</th>            
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-parqueadero>
+          <tr [pSelectableRow]="parqueadero">
+            <td>{{ parqueadero.identificacion }}</td>
+            <td>{{ parqueadero.nombres }}</td>
+            <td>{{ parqueadero.email }}</td>
+            <td>{{ parqueadero.edad }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  
+  <p-dialog header="Crear / Editar" [modal]="true" [(visible)]="verFormPropietario" [style]="{ width: '25rem' }" (onHide)="cancel()">
+    <form [formGroup]="formPropietario" class="flex flex-column gap-5">
+
+      <div class="flex flex-column gap-2">
+        <label for="identificacion">Identificación</label>
+        <input
+          formControlName="identificacion"
+          pInputText
+          id="identificacion"
+          aria-describedby="username-help"/>
+      </div>
+
+      <div class="flex flex-column gap-2">
+        <label for="nombres">Nombre completo</label>
+        <input
+          formControlName="nombres"
+          pInputText
+          id="nombres"
+          aria-describedby="username-help"/>
+      </div>
+  
+      <div class="flex flex-column gap-2">
+        <label for="email">Email</label>
+        <input
+          formControlName="email"
+          pInputText
+          id="email"
+          aria-describedby="username-help"/>
+      </div>
+  
+      <div class="flex flex-column gap-2">
+        <label for="edad">Edad</label>
+        <input
+          formControlName="edad"
+          pInputText
+          id="edad"
+          aria-describedby="username-help"/>
+      </div>      
+    </form>
+  
+    <div class="flex justify-content-end gap-2 mt-4">
+      <p-button label="Cancelar" severity="secondary" (onClick)="cancel()" />
+      <p-button label="Guardar" disabled="{{!formPropietario.valid}}" (onClick)="accionFormularioPropietario()" />
+    </div>
+  </p-dialog>
+  
